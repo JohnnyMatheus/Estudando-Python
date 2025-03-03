@@ -27,3 +27,5 @@ print('Exponenciação:',exponenciacao)
 #MÓDULO - RESTO DA DIVISÃO
 modulo = 20%5
 print('Módulo:',modulo)
+print(10%2 == 0)
+print(10%3 == 0)
