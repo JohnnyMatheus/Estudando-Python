@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar Presença</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+    <video id="video" width="300" height="200" autoplay></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <div id="output"></div>
+
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const output = document.getElementById("output");
+
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+                requestAnimationFrame(tick);
+            });
+
+        function tick() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.height = video.videoHeight;
+                canvas.width = video.videoWidth;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                    inversionAttempts: "dontInvert",
+                });
+
+                if (code) {
+                    const matricula = code.data;
+                    fetch(`/presenca/registrar/${matricula}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            output.innerHTML = `Presença registrada para: ${data.aluno}`;
+                        });
+                }
+            }
+            requestAnimationFrame(tick);
+        }
+    </script>
+</body>
+</html>
