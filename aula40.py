@@ -5,6 +5,9 @@ while True:
     numero_2 = input('Digite outro número: ')
     operador = input('Digite o operador (+-/*): ')
     numeros_validos = None
+    num1_float = 0
+    num2_float = 0
+
     try:
         num1_float = float(numero_1)
         num2_float = float(numero_2)
@@ -24,6 +27,9 @@ while True:
     if len(operador)>1:
         print('Digite apenas um operador.')
         continue
+
+    if operador == '+':
+        print(f'')
 
     
 
