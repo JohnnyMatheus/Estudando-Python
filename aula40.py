@@ -29,7 +29,13 @@ while True:
         continue
 
     if operador == '+':
-        print(f'')
+        print(f'{num1_float} + {num2_float} = ',num1_float+num2_float)
+    elif operador == '-':
+        print(f'{num1_float} - {num2_float} = ',num1_float-num2_float)
+    elif operador == '/':
+        print(f'{num1_float} / {num2_float} = ',num1_float/num2_float)
+    elif operador == '*':
+        print(f'{num1_float} * {num2_float} = ',num1_float*num2_float)
 
     
 
