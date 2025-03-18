@@ -14,11 +14,13 @@ na palavra secreta.
 Faça a contagem de tentativas do seu
 usuário.
 """
+import os
 palavra_secreta = 'perfume'
 letras_acertadas =''
 tentativas = 0
 
 while True:
+    
     letra_digitada = input('Digite uma letra: ')
     tentativas +=1
     if len(letra_digitada)> 1:
@@ -33,6 +35,7 @@ while True:
             palavra_formada += letra_secreta
         else:
             palavra_formada += '*'
+    os.system('cls')
     print('Palavra formada: ',palavra_formada)
 
     if palavra_formada == palavra_secreta:
